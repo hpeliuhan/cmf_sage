@@ -18,3 +18,21 @@ At the edge, a model is deplivered in loaded in containers. CMF_SAGE keeps track
 1.We will have background thread that keep tracking of the "PYWAGGLE_LOG_DIR" for the newly created inference results and perform cmf logging.
 2.The logged cmf data are uploaded to waggle sensor datastore for cmf server metadata push.
 
+
+## hOW TO USE
+pip install cmf-sage
+
+import cmf_sage
+
+cmf_sage.cmf_logging_thread(pipeline_name, pipeline_file, model_path, result_dir,git_remote_url)
+
+What information you need to give cmf_sage to start logging:
+1. pipeline_name: Use the same pipeline name you are using to train the model.
+2. pipeline_file: default "mlmd". the sqlite file name to store the metadata.
+3. result_dir: Give the directory of the inference result you are going to save.
+4. model_path: Give the path of the model you are going to load.
+5. git_remote_url: git repository link for code versioning control.
+#to-do: define "stage_name" and "execution_name" Now using "inference" as default
+
+
+
