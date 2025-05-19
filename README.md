@@ -3,7 +3,7 @@ This project is to enable cmf metadata logging for waggle sensor plugins: https:
 The kickstart  use case is based on the wildfire detetion plugin:git@github.com:hpeliuhan/sage-smoke-detection.git.
 
 
-##Backgroud
+## Backgroud
 Plugin are deploye on the waggle sensor nodes to collect scientific data. The result is published via pywaggle plugin.
 Developer build metadata database of AI pipelines to keep track of the code, the artifacts and evaluation metrics of each executions performed during the training. Verifying the training model and using the inferencing data for continous learning helps training better AI model.
 Logging of the inferencing enviornment, artifacts and models becomes important in distributed network such as waggle sensor platform.
@@ -19,7 +19,7 @@ At the edge, a model is deplivered in loaded in containers. CMF_SAGE keeps track
 2.The logged cmf data are uploaded to waggle sensor datastore for cmf server metadata push.
 
 
-## hOW TO USE
+## HOW TO USE
 pip install cmf-sage
 
 import cmf_sage
