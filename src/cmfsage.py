@@ -36,6 +36,7 @@ class cmfsage:
         self.cmf_logging_queue = asyncio.Queue() 
         self.cmf_archive_queue = asyncio.Queue()
         self.cmf_upload_queue = asyncio.Queue() 
+        self.base_dir = os.getcwd()
 
     def check_path(self):
         # If path exists, use os.path.isdir/os.path.isfile
@@ -92,8 +93,8 @@ class cmfsage:
                 tar_path = os.path.join(self.result_archive_dir, f"archive_{timestamp}.tar.gz")
                 with tarfile.open(tar_path, "w:gz") as tar:
                     for file in archive_paths:
-                        # Maintain folder structure relative to result_backup_dir
-                        arcname = file.relative_to(self.result_backup_dir)
+                        # Maintain folder structure relative to result_archive_dir
+                        arcname = os.path.relpath(file, self.base_dir)
                         tar.add(file, arcname=arcname)
                 logger.info(f"Created archive: {tar_path} with files: {archive_paths}")
                 await self.cmf_logging_queue.put(tar_path)
@@ -143,7 +144,9 @@ class cmfsage:
                         tar.add(self.pipeline_file, arcname=self.pipeline_file)
                     for file_path in archive_paths:
                         if os.path.exists(file_path):
-                            tar.add(file_path, arcname=os.path.basename(file_path))
+                            arcname = os.path.relpath(file_path, self.base_dir)
+                            tar.add(file_path, arcname=arcname)
+                            
                 await self.cmf_upload_queue.put(tar_path)
             await asyncio.sleep(0.05)  # short sleep for responsiveness
 

@@ -1,15 +1,15 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
-    name='cmf-sage',
-    version='0.2.0',
+    name='cmfsage',
+    version='0.0.6',
     description='This project is to enable common metadata framework logging for waggle sensor plugins: https://github.com/waggle-sensor.',
     author='han.liu@hpe.com',
-    packages=find_packages(),
+    py_modules=["cmfsage"],
+    package_dir={"": "src"},
     install_requires=[
         "cmflib",
         "pywaggle"
-
     ],
     python_requires='>=3.9',
 )
